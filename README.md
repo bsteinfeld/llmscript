@@ -92,6 +92,7 @@ mylist = ['John', 'Mary']
 instruction='x = a random British sounding name; {append({x})}'
 llm = llmscript.LLMScript(mylist)
 llm.run(instruction)
+# mylist will now contain a third name
 ```
 
 ## Query a db and return based on a condition
