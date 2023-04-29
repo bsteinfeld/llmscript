@@ -1,0 +1,46 @@
+# Secrets
+.env
+
+# Byte-compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+*.venv
+env/
+.pyenv
+
+# Jupyter Notebook checkpoints and metadata
+.ipynb_checkpoints
+*.ipynb_metadata
+
+# Distribution / packaging
+*.egg-info/
+*.egg
+*.wheel
+dist/
+build/
+
+# Test output and coverage data
+.coverage
+.coverage.*
+.pytest_cache/
+.tox/
+nosetests.xml
+
+# Log files
+*.log
+
+# IDEs and text editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# OS generated files
+.DS_Store
+Thumbs.db
