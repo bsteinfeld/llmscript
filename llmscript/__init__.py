@@ -44,12 +44,12 @@ class LLMScript:
 
         # examples = [{'type': 'Local Variable', 'name': key, 'value': f" = {value}"} for key, value in self.variables.items()]
 
-        examples = [{'type': 'Local Variable', 'name': key, 'value': f" = {str(value).replace('{', '{{').replace('}', '}}')}" if isinstance(value, dict) else f" = {value}"} for key, value in self.variables.items()]
+        examples = [{'type': 'Local Variable', 'name': key, 'value': f" = {str(value).replace('{', '{{').replace('}', '}}')}" if isinstance(value, dict) else f" = {value}"} for key, value in self.variables.items() if f"{{{key}}}" in instruction]
 
         if localVariables is not None:
-            examples.extend([{'type': 'Local Variable', 'name': key, 'value': f" = {str(value).replace('{', '{{').replace('}', '}}')}" if isinstance(value, dict) else f" = {value}"} for key, value in localVariables.items()])
+            examples.extend([{'type': 'Local Variable', 'name': key, 'value': f" = {str(value).replace('{', '{{').replace('}', '}}')}" if isinstance(value, dict) else f" = {value}"} for key, value in localVariables.items() if f"{{{key}}}" in instruction])
 
-        examples.extend([{'type': 'Action', 'name': key, 'value': ''} for key, value in self.methods.items()])
+        examples.extend([{'type': 'Action', 'name': key, 'value': ''} for key, value in self.methods.items() if f"{key}(" in instruction])
 
         example_formatter_template = '- {type}: {name}{value}'
         example_prompt = PromptTemplate(
@@ -220,8 +220,9 @@ Response is a String.'''
                 newname = action + generate_random_string(5)
                 localVariables[newname] = value
                 instruction = re.sub(pattern, f"{{{newname}}}", instruction, count=1)
-                print("Local Variables Are")
-                print(localVariables)
+                if debug:
+                    print("Local Variables Are")
+                    print(localVariables)
 
             return self.run(instruction, returnClass=returnClass, localVariables=localVariables, debug=debug)
         
