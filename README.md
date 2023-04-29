@@ -22,7 +22,22 @@ pip install llmscript
 ```
 
 ## Setup API Key
+
+```bash
+# Recommended for development: dotenv
+# Copy template
+cp .env.template .env
+# Edit .env and fill in OPENAI_API_KEY
+
+# Otherwise: export
 export OPENAI_API_KEY="<your openapi api key>"
+```
+
+## Run Tests
+
+```bash
+pytest
+```
 
 
 # Basic Usage:
