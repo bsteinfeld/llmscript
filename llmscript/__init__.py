@@ -20,15 +20,6 @@ class LLMScript:
         self.context = context
         self.set_methods_and_variables()
 
-    def run(self, instrution, returnClass=None):
-        """
-        The main method
-        """
-
-        result = run_langchain(self, instruction, returnClass)
-
-        return result
-
     def set_methods_and_variables(self):
         self.methods = {}
         self.variables = {}
@@ -44,11 +35,9 @@ class LLMScript:
 
         return self.methods, self.variables
 
-        
-
-    def run_langchain(self, instruction, returnClass=None, localVariables=None, debug=False):
+    def run(self, instruction, returnClass=None, localVariables=None, debug=False):
         """
-        The LLM code
+        The Main method
         """
 
         self.set_methods_and_variables()
@@ -234,7 +223,7 @@ Response is a String.'''
                 print("Local Variables Are")
                 print(localVariables)
 
-            return self.run_langchain(instruction, returnClass=returnClass, localVariables=localVariables, debug=debug)
+            return self.run(instruction, returnClass=returnClass, localVariables=localVariables, debug=debug)
         
         elif 'delayed_actions' in responseJSON  and responseJSON['delayed_actions'] is not None:
             actions = responseJSON['delayed_actions']
